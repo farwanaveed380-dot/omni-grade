@@ -1,0 +1,6 @@
+{
+  "name": "OmniGrade Academic Calculator",
+  "description": "Free, secure weighted grade calculator, final exam grade predictor, and GPA calculation suite with comprehensive academic grading guides and tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
