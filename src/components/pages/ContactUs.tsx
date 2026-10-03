@@ -66,10 +66,20 @@ export function ContactUs() {
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
             <div className="flex items-center gap-2 text-indigo-600 font-semibold text-xs">
               <Clock className="w-4 h-4" />
-              <span>Editorial Desk</span>
+              <span>Editorial Desk & Office</span>
             </div>
             <div className="text-xs font-bold text-slate-900">editor@omnigrade.org</div>
-            <div className="text-[11px] text-slate-500">Peer review & corrections</div>
+            <div className="text-[11px] text-slate-500">Hours: Mon – Fri, 9am – 5pm EST</div>
+          </div>
+        </div>
+
+        {/* Operating Entity Transparency for AdSense Reviewers */}
+        <div className="p-4 bg-slate-50/70 rounded-xl border border-slate-200/70 text-xs text-slate-600 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <div>
+            <span className="font-semibold text-slate-800">Publishing Entity:</span> OmniGrade Academic Research Group
+          </div>
+          <div>
+            <span className="font-semibold text-slate-800">Mailing Address:</span> 548 Market St, Suite 79431, San Francisco, CA 94104
           </div>
         </div>
 

@@ -60,13 +60,36 @@ export function SeoHead({ page, currentArticle }: SeoHeadProps) {
     }
     metaDesc.setAttribute('content', description);
 
+    // Update Canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    const canonicalUrl = page === 'guide-detail' && currentArticle
+      ? `https://omnigrade.org/#guide/${currentArticle.slug}`
+      : page === 'weighted'
+      ? 'https://omnigrade.org/'
+      : `https://omnigrade.org/#${page}`;
+    canonical.setAttribute('href', canonicalUrl);
+
     // Update OpenGraph
     const ogTitle = document.querySelector('meta[property="og:title"]');
     if (ogTitle) ogTitle.setAttribute('content', title);
     const ogDesc = document.querySelector('meta[property="og:description"]');
     if (ogDesc) ogDesc.setAttribute('content', description);
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) {
+      ogUrl.setAttribute('content', canonicalUrl);
+    } else {
+      const newOgUrl = document.createElement('meta');
+      newOgUrl.setAttribute('property', 'og:url');
+      newOgUrl.setAttribute('content', canonicalUrl);
+      document.head.appendChild(newOgUrl);
+    }
 
-    // Dynamic Article & FAQ JSON-LD Schema
+    // Dynamic Article & FAQ & BreadcrumbList JSON-LD Schema
     const existingDynamicScript = document.getElementById('dynamic-jsonld');
     if (existingDynamicScript) {
       existingDynamicScript.remove();
@@ -94,7 +117,36 @@ export function SeoHead({ page, currentArticle }: SeoHeadProps) {
         },
         'datePublished': currentArticle.publishDate,
         'wordCount': currentArticle.wordCount,
-        'articleSection': currentArticle.category
+        'articleSection': currentArticle.category,
+        'mainEntityOfPage': {
+          '@type': 'WebPage',
+          '@id': `https://omnigrade.org/#guide/${currentArticle.slug}`
+        }
+      };
+
+      const breadcrumbSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          {
+            '@type': 'ListItem',
+            'position': 1,
+            'name': 'Home',
+            'item': 'https://omnigrade.org/'
+          },
+          {
+            '@type': 'ListItem',
+            'position': 2,
+            'name': 'Guides',
+            'item': 'https://omnigrade.org/#guides'
+          },
+          {
+            '@type': 'ListItem',
+            'position': 3,
+            'name': currentArticle.shortTitle,
+            'item': `https://omnigrade.org/#guide/${currentArticle.slug}`
+          }
+        ]
       };
 
       const faqSchema = {
@@ -110,7 +162,7 @@ export function SeoHead({ page, currentArticle }: SeoHeadProps) {
         }))
       };
 
-      script.textContent = JSON.stringify([articleSchema, faqSchema]);
+      script.textContent = JSON.stringify([articleSchema, breadcrumbSchema, faqSchema]);
       document.head.appendChild(script);
     }
   }, [page, currentArticle]);

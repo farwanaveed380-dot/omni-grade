@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { AcademicArticle, PageView, ToolType } from '../../types';
 import { ARTICLES_DATA } from '../../data/articles';
 import { ArrowLeft, Clock, Calendar, User, Calculator, ArrowRight, Share2, Check, Bookmark, CheckCircle2 } from 'lucide-react';
+import { AdBanner } from '../ads/AdBanner';
 
 interface ArticleDetailProps {
   article: AcademicArticle;
@@ -217,6 +218,9 @@ export function ArticleDetail({ article, onBackToArticles, onNavigateToTool, onS
             )}
           </section>
         ))}
+
+        {/* Compliant In-Content AdSense Responsive Placement */}
+        <AdBanner format="responsive" />
 
         {/* FAQs Section */}
         {article.faqs && article.faqs.length > 0 && (

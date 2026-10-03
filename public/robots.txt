@@ -1,0 +1,21 @@
+# OmniGrade Academic Suite Robots.txt
+# https://omnigrade.org
+
+User-agent: *
+Allow: /
+
+# Dedicated rule for Google AdSense Crawler
+User-agent: Mediapartners-Google
+Allow: /
+
+# Dedicated rule for Googlebot
+User-agent: Googlebot
+Allow: /
+Allow: /*.js
+Allow: /*.css
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.svg
+
+# Sitemap index
+Sitemap: https://omnigrade.org/sitemap.xml

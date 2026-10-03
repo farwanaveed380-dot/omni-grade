@@ -19,6 +19,8 @@ import { TermsConditions } from './components/pages/TermsConditions';
 import { EmbedWidgetModal } from './components/growth/EmbedWidgetModal';
 import { AcademicCitationModal } from './components/growth/AcademicCitationModal';
 import { PrintWorksheetModal } from './components/growth/PrintWorksheetModal';
+import { CookieConsent } from './components/common/CookieConsent';
+import { AdBanner } from './components/ads/AdBanner';
 import { Calculator, Target, GraduationCap, ArrowLeftRight, Sliders, BookOpen, ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export default function App() {
@@ -201,8 +203,11 @@ export default function App() {
 
         {/* Semantic Knowledge Base Teaser (Shown on tool pages to encourage deep exploration) */}
         {['weighted', 'final', 'gpa', 'converter', 'curve'].includes(activePage) && (
-          <div className="mt-16 pt-12 border-t border-slate-200">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div className="mt-12 pt-8 border-t border-slate-200">
+            {/* Compliant AdSense Leaderboard Placement */}
+            <AdBanner format="horizontal" />
+
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 mt-6">
               <div>
                 <span className="text-xs font-semibold text-indigo-600 uppercase tracking-wider">
                   Academic Knowledge Base
@@ -274,6 +279,11 @@ export default function App() {
       <PrintWorksheetModal
         isOpen={isPrintOpen}
         onClose={() => setIsPrintOpen(false)}
+      />
+
+      {/* GDPR / CCPA / AdSense Compliant Cookie Consent Notice */}
+      <CookieConsent
+        onLearnMore={() => handleNavigate('privacy')}
       />
 
     </div>
